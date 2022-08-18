@@ -15,6 +15,16 @@
     <p>{{ $tweet->content }}</p>
     @endforeach
   </div>
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>
