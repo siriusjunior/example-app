@@ -19,12 +19,17 @@ class CreateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
         return [
             'tweet' => 'required|max:140'
         ];
+    }
+
+    public function tweet(): string
+    {
+        return $this->input('tweet');
     }
 }
