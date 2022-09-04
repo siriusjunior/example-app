@@ -10,6 +10,7 @@
           {{ $tweet->user->name }}
         </span>
         <p class="text-gray-600">{!! nl2br(e($tweet->content)) !!}</p>
+        <x-tweet.options :tweetId="$tweet->id" :userId="$tweet->user_id"></x-tweet.options>
       </div>
     </li>
     @endforeach
