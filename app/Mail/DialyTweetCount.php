@@ -2,23 +2,28 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DialyTweetCount extends Mailable
+class DialyTweetCount extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+
+    public User $toUser;
+    public int $count;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $toUser, int $count)
     {
-        //
+        $this->toUser = $toUser;
+        $this->count = $count;
     }
 
     /**
@@ -28,6 +33,7 @@ class DialyTweetCount extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject("昨日は{$this->count}件のつぶやきが追加されました！")
+            ->markdown('email.diary_tweet_count');
     }
 }
