@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\DialyTweetCount;
+use App\Mail\DailyTweetCount;
 use App\Models\User;
 use App\Services\TweetService;
 use Illuminate\Console\Command;
@@ -22,11 +22,16 @@ class SendDailyTweetCountMail extends Command
      *
      * @var string
      */
-    protected $description = '前日のつぶやき数を集計してユーザーに集計メールを送信します。';
+    protected $description = '前日のつぶやき数を集計してつぶやきを促すメールを送ります。';
 
     private TweetService $tweetService;
     private Mailer $mailer;
 
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
     public function __construct(TweetService $tweetService, Mailer $mailer)
     {
         parent::__construct();
@@ -45,7 +50,8 @@ class SendDailyTweetCountMail extends Command
         $users = User::get();
         foreach ($users as $user) {
             $this->mailer->to($user->email)
-                ->send(new DialyTweetCount($user, $tweetCount));
+                ->send(new DailyTweetCount($user, $tweetCount));
         }
+        return 0;
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DialyTweetCount extends Mailable implements ShouldQueue
+class DailyTweetCount extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -34,6 +34,6 @@ class DialyTweetCount extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->subject("昨日は{$this->count}件のつぶやきが追加されました！")
-            ->markdown('email.diary_tweet_count');
+            ->markdown('email.daily_tweet_count');
     }
 }
