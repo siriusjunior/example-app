@@ -17,7 +17,6 @@ class ImageFactory extends Factory
      */
     public function definition()
     {
-        //ディレクトリがなければ作成
         if (!Storage::exists('public/images')) {
             Storage::makeDirectory('public/images');
         }
